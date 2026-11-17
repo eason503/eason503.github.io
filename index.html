@@ -222,6 +222,13 @@ a.sheet:hover, a.sheet:focus-visible { transform: translate(-3px, -3px); box-sha
 [hidden] { display: none !important; }
 .empty { color: var(--muted); font-family: var(--mono); font-size: 14px; }
 
+/* High school strip */
+.hs { margin-top: 28px; display: grid; gap: 8px; }
+.hs-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: baseline; gap: 6px 18px; padding: 12px 16px; background: var(--sheet); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.hs-row:hover, .hs-row:focus-visible { border-color: var(--accent); }
+.hs-title { font-family: var(--display); font-size: 22px; font-weight: 600; text-transform: uppercase; line-height: 1.1; }
+.hs-sum { color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .hs-row { grid-template-columns: minmax(0, 1fr) auto; } .hs-sum { grid-column: 1 / -1; grid-row: 2; } }
 /* Skills */
 .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0; border: 1.5px solid var(--ink); background: var(--sheet); }
 .skills > div { padding: 18px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0 -1px -1px 0; }
@@ -314,6 +321,15 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       </div>
             <div class="filters" id="filters" role="group" aria-label="Filter projects by area"></div>
       <div class="grid" id="grid"></div>
+      <div class="hs" aria-label="High school work">
+        <p class="note">High school</p>
+        <a class="hs-row" href="https://homeworkstack.com">
+          <span class="hs-title">A Farewell to Calculus</span>
+          <span class="hs-sum">Calculus 12 project: a website written as a eulogy for calculus, from limits to integration.</span>
+          <span class="note">May 2026</span>
+          <span class="open">homeworkstack.com &#8599;</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -739,44 +755,6 @@ var PROJECTS = [
     ],
     gallery: [
       { src: "images/wpt-transmitter-full.jpg", cap: "Transmitter: centre-tapped coil, three resistors in series, transistor and 9 V battery clip" }
-    ]
-  },
-  {
-    id: "farewell-to-calculus",
-    title: "A Farewell to Calculus",
-    area: "Math",
-    date: "May 2026",
-    summary: "A website written as a eulogy for calculus, walking through limits, derivatives, applications and integration. My Calculus 12 final project.",
-    role: "Individual, Calculus 12 project",
-    tools: ["AI-assisted web development", "Web publishing", "Calculus 12"],
-    image: "images/calculus-cover.png",
-    alt: "Cover reading A Farewell to Calculus, a Calculus 12 tribute",
-    link: "https://homeworkstack.com",
-    linkLabel: "homeworkstack.com",
-    doc: [
-      { h: "Brief", p: [
-        "For my Calculus 12 final project I wrote a tribute to the course in the form of a eulogy, and published it as a website instead of a paper. It is live at homeworkstack.com."
-      ] },
-      { h: "What is on the site", list: [
-        "The eulogy: six chapters that tell the story of calculus, starting from the idea of a limit and the continuity it makes possible.",
-        "The journey: four cards covering limits and continuity, derivatives, applications and integration, each with its defining formula.",
-        "Living equations: eight typeset formulas, from the limit definition of the derivative through the product, quotient and chain rules to both parts of the Fundamental Theorem of Calculus.",
-        "A historical timeline from Archimedes' method of exhaustion, through Newton and Leibniz, to Cauchy's rigorous limits and modern uses.",
-        "A candle the visitor can light to pay their respects."
-      ] },
-      { h: "The math it covers", table: {
-        head: ["Topic", "Idea"],
-        rows: [
-          ["Limits and continuity", "Approaching a value without reaching it; an unbroken path"],
-          ["Derivatives", "Instantaneous rate of change; product, quotient and chain rules"],
-          ["Applications", "Optimization where f'(x) = 0, related rates"],
-          ["Integration", "Summing infinitely thin slices into an area; the Fundamental Theorem"]
-        ]
-      } },
-      { h: "How I built it", p: [
-        "I built the site through AI-assisted development. I planned the structure and the story it tells, then worked with an AI coding assistant to turn that plan into working code, directing each section and refining the layout, typeset equations and interactions until the result matched what I had in mind.",
-        "The finished site is published on its own domain, homeworkstack.com."
-      ] }
     ]
   }
 ];
