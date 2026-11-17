@@ -211,7 +211,8 @@ a.sheet:hover, a.sheet:focus-visible { transform: translate(-3px, -3px); box-sha
 .skills h3 { font-size: 24px; font-weight: 600; text-transform: uppercase; margin: 6px 0 10px; }
 .skills ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 15px; }
 
-/* Education and experience */
+/* Education */
+.edu { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 .entries { display: grid; gap: 16px; align-content: start; }
 .entry { background: var(--sheet); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 14px 18px; display: grid; gap: 6px; }
 .entry h3 { font-size: 26px; font-weight: 600; }
@@ -256,7 +257,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <nav aria-label="Sections">
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -314,42 +315,22 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     </div>
   </section>
 
-  <section id="experience">
+  <section id="education">
     <div class="wrap">
       <div class="head">
-        <h2>Education and experience</h2>
-        <p class="note">Where I have studied and volunteered</p>
+        <h2>Education</h2>
+        <p class="note">Where I have studied</p>
       </div>
-      <div class="two">
-        <div class="entries">
-          <p class="note">Education</p>
-          <div class="entry">
-            <h3>University of British Columbia</h3>
-            <p class="note">Sep 2026 to present / Vancouver, BC</p>
-            <p>Bachelor of Applied Science, Engineering. First year: differential calculus, physics, statics, chemistry, microeconomics and introduction to engineering.</p>
-          </div>
-          <div class="entry">
-            <h3>Johnston Heights Secondary</h3>
-            <p class="note">Graduated Jun 2026 / Surrey, BC</p>
-            <p>Dogwood Diploma, GPA 4.0. Physics 12 and Calculus 12 led to the capstone and calculus projects above.</p>
-          </div>
+      <div class="entries edu">
+        <div class="entry">
+          <h3>University of British Columbia</h3>
+          <p class="note">Sep 2026 to present / Vancouver, BC</p>
+          <p>Bachelor of Applied Science, Engineering. First year: differential calculus, physics, statics, chemistry, microeconomics and introduction to engineering.</p>
         </div>
-        <div class="entries">
-          <p class="note">Volunteering</p>
-          <div class="entry">
-            <h3>Community event volunteer</h3>
-            <p class="note">Team Taiwan Club / 2024 to present / Vancouver, BC</p>
-            <p>Set up and ran cultural and community events, kept supplies and displays stocked, and helped visitors find their way.</p>
-          </div>
-          <div class="entry">
-            <h3>Event staff volunteer</h3>
-            <p class="note">Foam Fest Canada / 2024 to 2026 / Vancouver, BC</p>
-            <p>Set up and tore down a large outdoor event, moved and sorted equipment across the site, and kept activity areas safe and clear.</p>
-          </div>
-          <dl class="facts">
-            <div><dt>Languages</dt><dd>English and Mandarin, fluent</dd></div>
-            <div><dt>Certificate</dt><dd>FOODSAFE Level 1</dd></div>
-          </dl>
+        <div class="entry">
+          <h3>Johnston Heights Secondary</h3>
+          <p class="note">Graduated Jun 2026 / Surrey, BC</p>
+          <p>Dogwood Diploma, GPA 4.0. Physics 12 and Calculus 12 led to the capstone and calculus projects above.</p>
         </div>
       </div>
     </div>
