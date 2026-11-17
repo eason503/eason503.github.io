@@ -841,7 +841,8 @@ function figureFor(p) {
     ? '<img src="' + esc(p.image) + '" alt="' + esc(p.alt || p.title) + '">'
     : drawing(p.figure || "sketch");
 }
-function sheetNo(index) { return "P-" + String(index + 1).padStart(3, "0"); }
+/* Numbered oldest = P-001, so the newest project has the largest number */
+function sheetNo(index) { return "P-" + String(PROJECTS.length - index).padStart(3, "0"); }
 
 /* Home page card: brief description and date only */
 function card(p, index) {
