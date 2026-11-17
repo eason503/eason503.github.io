@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eason Huang Engineering Portfolio</title>
+<meta name="description" content="Eason Huang is a first-year engineering student at UBC. Portfolio of engineering design, CAD and planning projects.">
+<meta property="og:title" content="Eason Huang | Engineering Portfolio">
+<meta property="og:description" content="First-year UBC engineering student. Projects in electronics, engineering design, CAD and planning.">
+<meta property="og:type" content="website">
+<meta name="author" content="Eason Huang">
+<meta name="theme-color" content="#132033">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23132033'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='18' text-anchor='middle' fill='%23f9fbfc'%3EEH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: the site is a set of engineering drawing sheets. Hero carries a title block,
+   every project is a numbered sheet (P-001...), annotations are set in mono like drawing notes. */
+:root {
+  --paper: #e9eef3;
+  --sheet: #f9fbfc;
+  --ink: #132033;
+  --muted: #536379;
+  --line: #b4c1cf;
+  --grid: rgba(23, 70, 201, .07);
+  --accent: #1746c9;
+  --mark: #c8400b;
+  --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0b1829;
+    --sheet: #10223b;
+    --ink: #e5edf9;
+    --muted: #94a7c3;
+    --line: #2c4567;
+    --grid: rgba(127, 176, 255, .07);
+    --accent: #86b4ff;
+    --mark: #ffb357;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0b1829;
+  --sheet: #10223b;
+  --ink: #e5edf9;
+  --muted: #94a7c3;
+  --line: #2c4567;
+  --grid: rgba(127, 176, 255, .07);
+  --accent: #86b4ff;
+  --mark: #ffb357;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.02; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.note {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+.skip { position: absolute; left: -9999px; top: 0; background: var(--ink); color: var(--sheet); padding: 10px 14px; z-index: 30; }
+.skip:focus { left: 8px; top: 8px; }
+/* Top bar */
+.bar { border-bottom: 1px solid var(--line); background: var(--sheet); position: sticky; top: 0; z-index: 5; }
+.bar .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding-top: 12px; padding-bottom: 12px; }
+.brand { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: .02em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+.bar nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.bar nav a { font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); text-decoration: none; padding: 4px 0; }
+.bar nav a:hover { color: var(--accent); }
+
+/* Hero */
+.hero { padding: 56px 0 48px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 40px; align-items: end; }
+.hero h1 { font-size: clamp(56px, 10vw, 112px); font-weight: 700; text-transform: uppercase; letter-spacing: -.005em; margin-top: 12px; }
+.hero h1 span { color: var(--accent); }
+.lede { font-size: 19px; max-width: 34em; margin-top: 20px; color: var(--ink); }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn {
+  font-family: var(--mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+  text-decoration: none; padding: 11px 18px; border: 1.5px solid var(--ink); color: var(--ink);
+}
+.btn.solid { background: var(--ink); color: var(--sheet); }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.solid:hover { background: var(--accent); color: var(--sheet); }
+
+.titleblock { border: 1.5px solid var(--ink); background: var(--sheet); display: grid; grid-template-columns: 1fr 1fr; }
+.titleblock div { padding: 9px 12px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); min-width: 0; }
+.titleblock div:nth-child(2n) { border-right: 0; }
+.titleblock div.full { grid-column: 1 / -1; border-right: 0; }
+.titleblock div:last-child, .titleblock div.last { border-bottom: 0; }
+.titleblock dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.titleblock dd { margin: 2px 0 0; font-weight: 500; overflow-wrap: anywhere; }
+.titleblock dd.big { font-family: var(--display); font-size: 26px; font-weight: 600; text-transform: uppercase; line-height: 1.05; }
+dl { margin: 0; }
+
+/* Sections */
+section { padding: 48px 0; border-top: 1px solid var(--line); }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 24px; }
+.head h2 { font-size: clamp(36px, 5vw, 52px); font-weight: 700; text-transform: uppercase; }
+.draft {
+  border: 1px dashed var(--mark); color: var(--mark); background: var(--sheet);
+  font-family: var(--mono); font-size: 12.5px; padding: 10px 14px; margin-bottom: 24px;
+}
+
+/* Filters */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.filters button {
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: .05em; text-transform: uppercase;
+  background: var(--sheet); color: var(--muted); border: 1px solid var(--line);
+  padding: 7px 13px; cursor: pointer;
+}
+.filters button:hover { color: var(--accent); border-color: var(--accent); }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); border-color: var(--ink); }
+
+/* Project sheets */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+.sheet { background: var(--sheet); border: 1.5px solid var(--ink); display: flex; flex-direction: column; min-width: 0; }
+.sheet figure { margin: 0; border-bottom: 1px solid var(--line); aspect-ratio: 16 / 8; color: var(--accent); position: relative; overflow: hidden; }
+.sheet figure svg, .sheet figure img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.stamp {
+  position: absolute; top: 12px; right: 12px; transform: rotate(-4deg);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--mark); border: 1.5px solid var(--mark); padding: 2px 7px; background: var(--sheet);
+}
+.sheet .body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; }
+.meta .no { color: var(--accent); }
+.sheet h3 { font-size: 30px; font-weight: 600; }
+.sheet .sum { color: var(--muted); }
+.pbr { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
+.pbr div { display: grid; grid-template-columns: 68px minmax(0, 1fr); gap: 12px; }
+.pbr dt { font-family: var(--mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+.pbr dd { margin: 0; font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.chips li { font-family: var(--mono); font-size: 12px; border: 1px solid var(--line); padding: 2px 8px; color: var(--ink); }
+.foot { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; }
+a.sheet { color: inherit; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
+a.sheet:hover, a.sheet:focus-visible { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--accent); }
+@media (prefers-reduced-motion: reduce) { a.sheet { transition: none; } a.sheet:hover { transform: none; } }
+.open { font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+
+/* Project documentation view */
+#detail { padding: 32px 0 64px; }
+.back { display: inline-block; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; margin-bottom: 28px; }
+.dhead { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: end; margin-bottom: 32px; }
+.dhead h1 { font-size: clamp(44px, 7vw, 80px); font-weight: 700; text-transform: uppercase; margin: 10px 0 14px; }
+.dhead .sum { font-size: 19px; max-width: 34em; }
+.dhero { margin: 0 0 40px; border: 1.5px solid var(--ink); background: var(--sheet); color: var(--accent); }
+.dhero img, .dhero svg { display: block; width: 100%; max-height: 520px; object-fit: cover; }
+.viewer { margin: 0 0 40px; border: 1.5px solid var(--ink); background: var(--sheet); }
+.viewer .stage { aspect-ratio: 16 / 9; background: #fff; border-bottom: 1px solid var(--line); }
+.viewer .stage img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.viewer .ctrl { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 10px 14px; }
+.viewer button {
+  font-family: var(--mono); font-size: 13px; letter-spacing: .05em; text-transform: uppercase;
+  background: var(--ink); color: var(--sheet); border: 1.5px solid var(--ink); padding: 8px 14px; cursor: pointer;
+}
+.viewer button:hover { background: var(--accent); border-color: var(--accent); }
+.viewer button:disabled { background: transparent; color: var(--muted); border-color: var(--line); cursor: default; }
+.viewer .count { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.viewer .cap { flex: 1 1 200px; font-size: 15px; }
+.doc { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; max-width: 760px; }
+.doc > section { min-width: 0; }
+.doc p, .doc li { overflow-wrap: break-word; }
+.doc h2 { font-size: 32px; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); display: flex; gap: 14px; align-items: baseline; }
+.doc h2 .note { color: var(--accent); }
+.doc p + p { margin-top: 12px; }
+.doc ul, .doc ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.doc p + ul, .doc p + ol { margin-top: 12px; }
+.doc .todo { border: 1px dashed var(--mark); color: var(--mark); background: var(--sheet); font-family: var(--mono); font-size: 13px; padding: 10px 14px; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); background: var(--sheet); margin-top: 12px; }
+.doc table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+.doc th, .doc td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.doc th { font-family: var(--mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.doc tr:last-child td { border-bottom: 0; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 4px; align-items: start; }
+.gallery figure { margin: 0; border: 1px solid var(--line); background: var(--sheet); }
+.gallery img { display: block; width: 100%; height: auto; }
+.gallery figcaption { font-family: var(--mono); font-size: 12px; color: var(--muted); padding: 8px 10px; border-top: 1px solid var(--line); }
+.pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); }
+.pager a { font-family: var(--mono); font-size: 13px; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; }
+[hidden] { display: none !important; }
+.empty { color: var(--muted); font-family: var(--mono); font-size: 14px; }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0; border: 1.5px solid var(--ink); background: var(--sheet); }
+.skills > div { padding: 18px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0 -1px -1px 0; }
+.skills h3 { font-size: 24px; font-weight: 600; text-transform: uppercase; margin: 6px 0 10px; }
+.skills ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 15px; }
+
+/* Education and experience */
+.entries { display: grid; gap: 16px; align-content: start; }
+.entry { background: var(--sheet); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 14px 18px; display: grid; gap: 6px; }
+.entry h3 { font-size: 26px; font-weight: 600; }
+/* Lightbox */
+#lightbox { position: fixed; inset: 0; z-index: 20; background: rgba(8, 14, 26, .92); display: flex; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+#lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; background: #fff; }
+.gallery img, #slideImg { cursor: zoom-in; }
+/* About + contact */
+.two { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; }
+.prose { display: grid; gap: 14px; max-width: 65ch; }
+.facts { display: grid; gap: 0; border: 1px solid var(--line); background: var(--sheet); align-self: start; }
+.facts div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.facts div:last-child { border-bottom: 0; }
+.facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+footer { border-top: 1px solid var(--line); padding: 20px 0 32px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+@media (max-width: 760px) {
+  .hero { padding: 36px 0 32px; }
+  .hero .wrap, .two, .dhead { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  section { padding: 36px 0; }
+  .bar nav a { padding: 8px 0; }
+  .viewer button { padding: 12px 16px; }
+  .viewer .cap { flex-basis: 100%; }
+  .pbr div, .facts div { grid-template-columns: 84px minmax(0, 1fr); }
+}
+@media print {
+  .bar, .filters, .cta, .pager, .back, .viewer .ctrl, .skip { display: none !important; }
+  body { background: #fff; }
+  .sheet, .entry { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#projects">Skip to projects</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Eason Huang</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div id="home">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="note">Engineering portfolio / Rev A</p>
+        <h1>Eason Huang<span>.</span></h1>
+        <p class="lede">First-year engineering student at UBC, leaning toward electrical engineering. I like taking a problem from a rough sketch to something built, tested and measured. This is a record of what I have made and what each project taught me.</p>
+        <div class="cta">
+          <a class="btn solid" href="#projects">See projects</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <dl class="titleblock" aria-label="Title block">
+        <div class="full"><dt>Title</dt><dd class="big">Project portfolio</dd></div>
+        <div><dt>Drawn by</dt><dd>Eason Huang</dd></div>
+        <div><dt>Program</dt><dd>BASc Engineering</dd></div>
+        <div><dt>School</dt><dd>UBC Vancouver</dd></div>
+        <div><dt>Year</dt><dd>1 of 4</dd></div>
+        <div class="last"><dt>Sheets</dt><dd id="sheetCount">4</dd></div>
+        <div class="last"><dt>Last revised</dt><dd>Nov 2026</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="head">
+        <h2>Projects</h2>
+        <p class="note">Select a sheet for the full documentation</p>
+      </div>
+            <div class="filters" id="filters" role="group" aria-label="Filter projects by area"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="head">
+        <h2>Skills</h2>
+        <p class="note">Tools I have used on real work</p>
+      </div>
+            <div class="skills">
+        <div><p class="note">01</p><h3>Design and CAD</h3><ul><li>SolidWorks part modelling for 3D printing</li><li>Hand sketching: front, side and isometric views</li><li>Cardboard prototyping to scale</li></ul></div>
+        <div><p class="note">02</p><h3>Engineering decisions</h3><ul><li>Stakeholder and needs assessment</li><li>Weighted decision matrices and sensitivity checks</li><li>Causal loop diagrams</li></ul></div>
+        <div><p class="note">03</p><h3>Communication</h3><ul><li>Team presentations and video pitches</li><li>Design posters</li><li>Excel for calculations and scoring</li></ul></div>
+        <div><p class="note">04</p><h3>Electronics</h3><ul><li>Soldering, wiring and coil winding</li><li>Multimeter testing and fault finding</li><li>Simple transistor and resistor circuits</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="head">
+        <h2>Education and experience</h2>
+        <p class="note">Where I have studied and volunteered</p>
+      </div>
+      <div class="two">
+        <div class="entries">
+          <p class="note">Education</p>
+          <div class="entry">
+            <h3>University of British Columbia</h3>
+            <p class="note">Sep 2026 to present / Vancouver, BC</p>
+            <p>Bachelor of Applied Science, Engineering. First year: differential calculus, physics, statics, chemistry, microeconomics and introduction to engineering.</p>
+          </div>
+          <div class="entry">
+            <h3>Johnston Heights Secondary</h3>
+            <p class="note">Graduated Jun 2026 / Surrey, BC</p>
+            <p>Dogwood Diploma, GPA 4.0. Physics 12 and Calculus 12 led to the capstone and calculus projects above.</p>
+          </div>
+        </div>
+        <div class="entries">
+          <p class="note">Volunteering</p>
+          <div class="entry">
+            <h3>Community event volunteer</h3>
+            <p class="note">Team Taiwan Club / 2024 to present / Vancouver, BC</p>
+            <p>Set up and ran cultural and community events, kept supplies and displays stocked, and helped visitors find their way.</p>
+          </div>
+          <div class="entry">
+            <h3>Event staff volunteer</h3>
+            <p class="note">Foam Fest Canada / 2024 to 2026 / Vancouver, BC</p>
+            <p>Set up and tore down a large outdoor event, moved and sorted equipment across the site, and kept activity areas safe and clear.</p>
+          </div>
+          <dl class="facts">
+            <div><dt>Languages</dt><dd>English and Mandarin, fluent</dd></div>
+            <div><dt>Certificate</dt><dd>FOODSAFE Level 1</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="head">
+        <h2>About</h2>
+        <p class="note">Who is behind the drawings</p>
+      </div>
+      <div class="two">
+        <div class="prose">
+          <p>I am in first-year engineering at the University of British Columbia, working through calculus, physics, statics, chemistry and the first-year design course.</p>
+          <p>The projects I enjoy most have a number attached: a load to carry, a time to beat, an error to shrink. I like finding out why a design failed as much as getting it to work.</p>
+          <p>I am leaning toward electrical engineering, and I am looking for design team, co-op and research opportunities where I can build things and learn from people who are better at it than I am.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Studying</dt><dd>BASc Engineering, UBC</dd></div>
+          <div><dt>Year</dt><dd>First year, 2026/27</dd></div>
+          <div><dt>Interests</dt><dd>Electrical engineering</dd></div>
+          <div><dt>Working on</dt><dd>An assistive video game controller, my current APSC 100 design project</dd></div>
+          <div><dt>Based in</dt><dd>Vancouver, BC</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="head">
+        <h2>Contact</h2>
+        <p class="note">Fastest reply by email</p>
+      </div>
+      <dl class="facts" style="max-width: 560px">
+        <div><dt>Email</dt><dd><a href="mailto:easonh503@gmail.com">easonh503@gmail.com</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/easonh503-hub">github.com/easonh503-hub</a></dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/easonhuang503">linkedin.com/in/easonhuang503</a></dd></div>
+        <div><dt>Resume</dt><dd>Available on request</dd></div>
+      </dl>
+    </div>
+  </section>
+</div>
+<article id="detail" hidden></article>
+<div id="lightbox" hidden role="dialog" aria-label="Enlarged image"><img src="" alt=""></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="note">Eason Huang / Engineering portfolio</p>
+    <p class="note">Sheet 1 of 1 / Rev A / Nov 2026</p>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------
+   EDIT YOUR PROJECTS HERE. One block per project.
+
+   Card (home page):  title, area, date, summary, image or figure
+   Documentation page: role, tools, doc (sections), gallery
+
+   id:     the page address, e.g. id "cardboard-chair" opens at #cardboard-chair
+           (letters, numbers and hyphens only)
+   image:  a photo in the images folder, or leave it out and set
+           figure: "route" | "sketch" for a line drawing
+   doc:    sections in order. Each has a heading h and any of:
+           p (paragraphs), list (bullets), steps (numbered),
+           table {head, rows}, todo (a red note for things still to write)
+---------------------------------------------------------------- */
+var PROJECTS = [
+  {
+    id: "bike-lane-proposal",
+    title: "Closing the Powell Street gap",
+    area: "Planning",
+    date: "Oct to Nov 2026",
+    summary: "A recommendation to the City of Vancouver: make a protected lane on Powell Street its next cycling project, closing a 0.9 km gap in the Portside Greenway.",
+    role: "Team of 5, APSC 100 Module 2",
+    tools: ["Weighted decision matrix", "Stakeholder salience", "Sensitivity analysis", "Causal loop diagram"],
+    image: "slides/powell-01.jpg",
+    alt: "Title slide: Closing the Powell St gap",
+    /* Slides shown in the viewer at the top of the page, in order. */
+    slides: [
+      { src: "slides/powell-01.jpg", cap: "Title" },
+      { src: "slides/powell-02.jpg", cap: "Objectives: safety, accessibility, sustainability" },
+      { src: "slides/powell-03.jpg", cap: "The four candidate routes" },
+      { src: "slides/powell-04.jpg", cap: "Our recommendation: Portside Greenway" },
+      { src: "slides/powell-05.jpg", cap: "The problem: risk Powell or detour uphill" },
+      { src: "slides/powell-06.jpg", cap: "Protected lane built in two phases" },
+      { src: "slides/powell-07.jpg", cap: "How we determined the best route" },
+      { src: "slides/powell-08.jpg", cap: "Greenway tops the alternatives in overall benefit" },
+      { src: "slides/powell-09.jpg", cap: "Sensitivity: the lead never drops below 1.28" },
+      { src: "slides/powell-10.jpg", cap: "Reinforcing loop: protected lane coverage and cycling support" },
+      { src: "slides/powell-11.jpg", cap: "Why only a protected lane works here" },
+      { src: "slides/powell-12.jpg", cap: "Timeline: build fast now, upgrade later" },
+      { src: "slides/powell-13.jpg", cap: "Connectivity for East Vancouver" },
+      { src: "slides/powell-14.jpg", cap: "Trade-offs: parking, delivery and bus stop islands" },
+      { src: "slides/powell-15.jpg", cap: "Summary" },
+      { src: "slides/powell-17.jpg", cap: "AI citation" },
+      { src: "slides/powell-18.jpg", cap: "Causal loop diagram" }
+    ],
+    doc: [
+      { h: "Brief", p: [
+        "Our team acted as engineering consultants advising the City of Vancouver on its next protected bike lane. There were four candidate routes, and we had to recommend one and defend it.",
+        "We set three objectives for the recommendation: safety (less exposure to conflicts with vehicles), accessibility (better network connections and convenience) and sustainability (a balance of environmental, social and economic impact)."
+      ] },
+      { h: "The four options", table: {
+        head: ["Corridor", "Segment"],
+        rows: [
+          ["West Kent Avenue", "Oak Street to Ontario Street"],
+          ["West 41st Avenue", "Camosun Street to Cambie Street"],
+          ["West 14th Avenue", "Balaclava Street to Alder Street"],
+          ["Portside Greenway (Powell Street)", "McLean Drive to Lakewood Drive"]
+        ]
+      } },
+      { h: "The problem on Powell", p: [
+        "The Portside Greenway runs about 7 km, but it has a 0.9 km gap on Powell Street. Cyclists either ride a busy truck route or take a longer, hillier detour."
+      ], table: {
+        head: ["Measure", "Value"],
+        rows: [
+          ["Gap in the greenway", "0.9 km"],
+          ["Traffic on Powell", "Over 30,000 vehicles per day"],
+          ["Detour around the gap", "1.6 km with 19 m of climbing"],
+          ["Survey respondents who avoid Powell", "83%"],
+          ["Cyclists on Powell who ride the sidewalk", "About three quarters"]
+        ]
+      } },
+      { h: "How we chose the route", steps: [
+        "Stakeholders and salience: identified everyone affected and ranked them. The City is the definitive stakeholder; businesses, freight and cyclists are the most affected.",
+        "Criteria: turned their needs into 10 criteria across economy, society and environment. Safety and accessibility mattered most.",
+        "Weights: weighted each group by salience, so those with the most at stake count the most.",
+        "Comparison: scored all four routes in a weighted decision matrix.",
+        "Check: ran a sensitivity analysis to see whether the result depends on our choice of weights."
+      ] },
+      { h: "Result", p: [
+        "The Portside Greenway scored highest, leading the next-best route by 1.52 points out of 10. It ranked first for economic benefit (net city cost, local business) and first for social benefit (safety, equity).",
+        "The lead holds up when the weights change. Shifting the weight of any single criterion up or down by 50% leaves the Greenway ahead by between 1.28 and 1.79 points."
+      ] },
+      { h: "Why a protected lane", p: [
+        "With this much traffic, paint is not enough. The City's all-ages-and-abilities guideline allows shared lanes only below 500 vehicles per day, and only a physically protected (Class IV) lane qualifies for TransLink cost sharing."
+      ], table: {
+        head: ["Facility", "Relative injury risk"],
+        rows: [
+          ["No facility", "1.00"],
+          ["Shared lane (sharrow)", "0.6 to 0.7"],
+          ["Painted lane", "0.5 to 0.7"],
+          ["Protected cycle track", "0.11"]
+        ]
+      } },
+      { h: "Build plan", p: [
+        "We proposed building in two phases: a rapid build first to prove the route works, then a permanent upgrade. With TransLink cost sharing, the net cost to the City is about $0.3 million."
+      ], table: {
+        head: ["Phase", "When", "What", "Cost", "TransLink share"],
+        rows: [
+          ["0: Planning", "2026", "Planning and approvals", "", ""],
+          ["1: Rapid build", "By 2028", "Precast concrete barriers", "$0.3 M", "100%"],
+          ["2: Hybrid permanent", "2030 onward", "Curbs and 1 to 2 signals", "$1.0 M", "75%"]
+        ]
+      } },
+      { h: "Wider benefits", list: [
+        "Connects Gastown and Downtown to East Vancouver, and links to the Union Street and Adanac Street bike routes.",
+        "Serves a neighbourhood where 54% of Grandview-Woodland residents commute without a car and 23% of residents are low-income.",
+        "Brings customers to the breweries, shops and restaurants along Powell.",
+        "Builds on itself: protected lanes make cycling safer and more appealing, more people ride, public support grows, and more protected lanes get built."
+      ] },
+      { h: "Trade-offs", list: [
+        "Curbside parking is removed on the north side, which may reduce access to north-side businesses.",
+        "Powell is an industrial street that relies on curbside delivery, and parts of the north side have no back alley, so unloading gets harder.",
+        "Bus stops move onto islands outside the bike lane, which adds a conflict point between cyclists and passengers and makes cyclists slow down."
+      ] },
+      { h: "My part", list: [
+        "Research: gathered the evidence on the Powell gap and the candidate routes.",
+        "Weighted decision matrix: built the matrix that scores the four routes.",
+        "Slide design: designed the presentation slides.",
+        "Presenting: delivered the two-phase build plan and the five-step method for choosing the route."
+      ] }
+    ]
+  },
+  {
+    id: "keychain",
+    title: "3D-printed keychain",
+    area: "CAD",
+    date: "Oct 2026",
+    summary: "My first CAD project: a steel-ball keychain with my team number, modelled in SolidWorks after one day of learning CAD.",
+    role: "Individual, APSC 100 CAD assignment",
+    tools: ["SolidWorks", "STL export", "3D printing"],
+    image: "images/keychain-cad.jpg",
+    alt: "SolidWorks render of a ball keychain with a T9 badge",
+    doc: [
+      { h: "Brief", p: [
+        "Design, model and 3D print an ornamental keychain of my own design. The class votes on the designs, and each one is sent to an outside print shop."
+      ] },
+      { h: "Requirements", list: [
+        "Fit inside a box 40 mm long, 15 mm wide and 10 mm high.",
+        "Include a hole at least 4 mm across for the keychain cable, with at least 2 mm of material around it.",
+        "Use a mirror, revolve or pattern feature somewhere in the model.",
+        "Mark the part with text."
+      ] },
+      { h: "Inspiration", p: [
+        "The design is inspired by the steel balls from Steel Ball Run, the seventh part of JoJo's Bizarre Adventure. I wanted a keychain that looked like one, with my own team badge on the front."
+      ] },
+      { h: "Design", p: [
+        "The body is a sphere with a raised pentagon badge on the front that reads T9, my studio team number. Recessed slots wrap around the sides, and a ring on top takes the keychain cable.",
+        "I checked the bounding box in SolidWorks against the size limit, then exported the part as an STL for printing."
+      ] },
+      { h: "What it shows", p: [
+        "This was my first CAD project, and I modelled it after a single day of learning SolidWorks. It took me a long time. Wrapping a badge and slots onto a curved surface is much harder than sketching on a flat face, and I had to work out each feature as I went.",
+        "The finished part is a record of how far one day of CAD took me: a spherical body, cut and raised features on a curved surface, and a model checked against real print limits."
+      ] },
+      { h: "Result", p: ["The design is submitted for printing. I have not received the printed part yet."] }
+    ]
+  },
+  {
+    id: "cardboard-chair",
+    title: "Cardboard chair for disaster relief",
+    area: "Design",
+    date: "Sep to Oct 2026",
+    summary: "A flat-pack chair that children aged 4 to 6 can build, personalize and play with in an evacuation shelter. Our team's final design was the Treasure Throne.",
+    role: "Team of 5, APSC 100 Module 1",
+    tools: ["Hand sketching", "Scale prototyping", "Stakeholder needs", "Concept ranking and scoring"],
+    image: "images/chair-sketch.jpg",
+    alt: "Notebook sketch of my chair concept in front and isometric views",
+    doc: [
+      { h: "Brief", p: [
+        "Our team answered a design competition from a fictional disaster-relief organization. After floods, fires and storms, families can spend days or weeks sheltering in gymnasiums with none of their own belongings. That is hardest on young children.",
+        "The ask was a personal cardboard chair for children aged 4 to 6. Building and decorating it gives them something to do together, and afterwards it is theirs to sit on and play with."
+      ] },
+      { h: "Requirements", list: [
+        "Made from a single flat 1.2 m by 1.2 m sheet of corrugated cardboard, so 100 chairs ship as one bundle about 40 cm high.",
+        "Cardboard only for anything structural: no tape, glue, straps or wood.",
+        "Works as a chair for relaxing, eating, playing and schoolwork.",
+        "Survives rough play and repeated assembly and disassembly.",
+        "Has a storage compartment under the seat for personal items.",
+        "Can be customized by the child, and has something that makes it fun."
+      ] },
+      { h: "How the chair is scored", table: {
+        head: ["Category", "Points", "What it measures"],
+        rows: [
+          ["Raw material", "15", "How small the flattened cardboard footprint is"],
+          ["Internal storage", "15", "How many blocks can be stored and carried inside"],
+          ["Static load", "15", "Maximum weight held for at least 3 seconds"],
+          ["Assembly time", "10", "How fast two people can assemble it from flat"],
+          ["Seat height and depth", "10", "Fit for a 4 to 6 year old (seat 12 to 13 in off the ground)"],
+          ["Universal design and engagement", "10", "Works for a broad range of children and keeps them engaged"],
+          ["Aesthetics", "10", "Appeal to children and caregivers"],
+          ["Comfort", "10", "Seat and backrest comfort and support"],
+          ["Ease of use", "5", "Getting in and out, and moving the chair"]
+        ]
+      } },
+      { h: "Stakeholders and needs", p: [
+        "Besides the children, we identified four stakeholder groups and listed what each one needs from the chair."
+      ], table: {
+        head: ["Stakeholder", "Key needs"],
+        rows: [
+          ["Children", "Holds their weight, comfortable, does not wobble, can be personalized"],
+          ["Disaster volunteers", "Simple to build, survives wear and tear, stores the child's belongings"],
+          ["Parents and guardians", "Holds the child's weight, easy to carry, keeps the child occupied"],
+          ["Manufacturers", "Quick to produce, simple design, cut from one flat sheet"],
+          ["Distribution", "Packs flat, large numbers fit in a small space, fits standard shipping sizes"]
+        ]
+      } },
+      { h: "Learning the material", p: [
+        "Before designing anything, we tested how cardstock strips fail. A flat strip buckles easily. It gets stronger when it is shorter, when its ends are held fixed, and when it is braced in the middle.",
+        "Folding a strip into a U or V beam let it carry more load before buckling than a flat strip, and triangular structures were stronger again. Those findings shaped the ridges and internal supports in our concepts."
+      ] },
+      { h: "My concept", p: [
+        "Each team member sketched and built a different concept. Mine is a box seat with a tall backrest. Two cardboard panels slot together into a cross inside the box. The cross carries load from the middle of the seat down to the floor, and it divides the space underneath into four storage sections.",
+        "The side walls have vertical ridges to help support weight. Cut-out handles on the backrest and the base let a child carry the chair or flip it over. The seat has a tic-tac-toe grid, with five X and five O cards to place on it, so the chair doubles as a game.",
+        "My scale prototype held more than 150 pounds. I built it with hot glue and tape to test the idea quickly, so the design would have needed a different, cardboard-only joining method for the real chair."
+      ] },
+      { h: "Choosing a concept", p: [
+        "We first ranked all five concepts as weak, medium or strong in each scoring category, then scored the top three out of 10 in nine categories."
+      ], table: {
+        head: ["Concept", "Static load", "Storage", "Cardboard use", "Assembly time", "Total / 90"],
+        rows: [
+          ["Backpack chair (selected)", "7", "9", "8", "8", "68"],
+          ["Teammate's box concept", "8", "7", "6", "7", "61"],
+          ["My cross-braced box", "10", "4", "5", "6", "58"]
+        ]
+      } },
+      { h: "Final design: the Treasure Throne", p: [
+        "The team developed the selected concept into the Treasure Throne, a pirate-themed chair with a snakes and ladders board printed on it for play."
+      ], list: [
+        "Seat 14 in wide, 14 in deep and 12 in tall.",
+        "About 800 cubic inches of storage inside.",
+        "Cut from a 43 in by 43 in flat pattern, which fits the single 4 ft sheet.",
+        "Assembles in about 40 seconds. Tabs and slots are colour coded in rainbow order, with dots that count the step number for children who are colour blind.",
+        "The seatback folds down so assembled chairs can stack.",
+        "Strong enough to hold an adult."
+      ] },
+      { h: "What I learned", p: [
+        "My concept scored highest of the three on strength, but it lost on storage and material use. The chair that won was not the best at any one thing; it was good at everything the rubric measured. I now check a design against every criterion before optimizing one of them."
+      ] },
+      { h: "Result", p: [
+        "We built the full-size Treasure Throne from the single sheet, presented it with our design poster at the studio showcase, and recorded a video pitch recommending it for production."
+      ] }
+    ],
+    gallery: [
+      { src: "images/chair-sketch-full.jpg", cap: "My concept sketch: front, side, isometric and upside-down views" },
+      { src: "images/chair-prototype-divider.jpg", cap: "My scale prototype from below, showing the crossed divider" },
+      { src: "images/chair-prototype-side.jpg", cap: "My scale prototype, side view with ridges and handle cut-outs" }
+    ]
+  },
+  {
+    id: "wireless-power",
+    title: "Wireless power transfer system",
+    area: "Electronics",
+    date: "Dec 2025 to Jun 2026",
+    summary: "A transmitter and receiver coil pair that lights an LED with no wire between them, built over four versions for my Grade 12 capstone.",
+    role: "Individual, Grade 12 capstone",
+    tools: ["Soldering", "Multimeter", "Coil winding", "Transistor oscillator", "Circuit troubleshooting"],
+    image: "images/wpt-transmitter.jpg",
+    alt: "Transmitter coil wound from copper wire with resistors, a transistor and a 9 V battery clip",
+    doc: [
+      { h: "Brief", p: [
+        "For my Grade 12 capstone I wanted to turn the electromagnetism I had learned in Physics 12 into a working device. I understood the formulas, but I had never seen whether I could make them do something.",
+        "The goal was a wireless power transfer system: a transmitter coil that creates a changing magnetic field, and a separate receiver coil that turns part of that field back into electricity to light an LED."
+      ] },
+      { h: "How it works", steps: [
+        "A 9 V battery supplies the energy.",
+        "A 2N2222A transistor switches the current on and off rapidly, so the current through the coil keeps changing.",
+        "The transmitter coil turns that changing current into a changing magnetic field.",
+        "The receiver coil sits in that field, and the changing flux induces a voltage in it (Faraday's law).",
+        "The induced current lights the LED. The receiver has no battery."
+      ] },
+      { h: "A misconception I corrected", p: [
+        "At first I thought a steady current through one coil would keep transferring power to the other. It does not. Only a changing magnetic field induces a voltage in the second coil, which is why the circuit needs the transistor to keep switching."
+      ] },
+      { h: "Design", table: {
+        head: ["Part", "Detail"],
+        rows: [
+          ["Transmitter coil", "30 turns of copper magnet wire: 15 turns, a centre tap, then 15 more"],
+          ["Receiver coil", "30 turns, with an LED across its two ends"],
+          ["Switching", "2N2222A transistor"],
+          ["Resistance", "Three 10 kΩ resistors in series, about 30 kΩ"],
+          ["Power", "9 V battery on the transmitter side, connected to the centre tap"],
+          ["Tools", "Soldering iron, solder and flux, multimeter"]
+        ]
+      } },
+      { h: "Timeline", table: {
+        head: ["Date", "Milestone"],
+        rows: [
+          ["Dec 2025", "Chose the topic and reviewed Faraday's law, magnetic flux and induced emf"],
+          ["Jan 2026", "Planned materials, studied transmitter circuits, learned how spacing and alignment affect transfer"],
+          ["Feb 2026", "Prepared the first build. Needed a resistance I did not have, so I combined resistors in series"],
+          ["Mar 2026", "Version 1 failed. Traced faults with a multimeter"],
+          ["Apr 2026", "Version 2 lit the LED wirelessly for the first time, then failed after being left on overnight"],
+          ["May 2026", "Rebuilt with cleaner soldering and coil winding. Tested distance and alignment"],
+          ["Jun 2026", "Documented the final design and presented it with a live demonstration"]
+        ]
+      } },
+      { h: "Four versions", list: [
+        "Version 1 did not light the LED at all. Likely causes were enamel left on the wire ends, weak solder joints, a wrong connection or a damaged transistor. I found the faults by testing continuity at each connection with a multimeter and eliminating sections one at a time. Lesson: a circuit can look connected and still fail electrically.",
+        "Version 2 worked, and the LED lit wirelessly for the first time. I then left it powered overnight, which drained the battery and may have damaged components.",
+        "Versions 3 and 4 had cleaner soldering, more consistent coil winding and more reliable connections. By then I could rebuild the circuit without following a tutorial."
+      ] },
+      { h: "Test results", table: {
+        head: ["Test", "Observation", "Why"],
+        rows: [
+          ["Coils very close", "LED is brightest", "Most of the field passes through the receiver"],
+          ["About 5 cm apart", "LED still lights, but dimmer", "Less field reaches the receiver"],
+          ["Farther than 5 cm", "LED dims or goes out", "Too little flux through the receiver coil"],
+          ["Coils misaligned or rotated", "LED dims or goes out", "Less overlap between the coils weakens induction"]
+        ]
+      }, p: [
+        "Maximum working distance was about 5 cm."
+      ] },
+      { h: "What I learned", p: [
+        "Textbook problems give you everything you need to find one answer. A real circuit has many ways to fail: one weak solder joint, one wire end with enamel still on it, or one damaged transistor stops the whole system.",
+        "The part I am proudest of is diagnosing what went wrong and improving each version. This project is what confirmed my interest in electrical engineering."
+      ] },
+      { h: "Next steps", list: [
+        "Add a toggle switch to control power and save the battery.",
+        "Measure voltage and efficiency instead of judging by LED brightness.",
+        "Test different coil sizes, wire gauges and turn counts.",
+        "Try powering a small motor or another load."
+      ] }
+    ],
+    gallery: [
+      { src: "images/wpt-transmitter-full.jpg", cap: "Transmitter: centre-tapped coil, three resistors in series, transistor and 9 V battery clip" }
+    ]
+  },
+  {
+    id: "farewell-to-calculus",
+    title: "A Farewell to Calculus",
+    area: "Math",
+    date: "May 2026",
+    summary: "A website written as a eulogy for calculus, walking through limits, derivatives, applications and integration. My Calculus 12 final project.",
+    role: "Individual, Calculus 12 project",
+    tools: ["AI-assisted web development", "Web publishing", "Calculus 12"],
+    image: "images/calculus-cover.png",
+    alt: "Cover reading A Farewell to Calculus, a Calculus 12 tribute",
+    link: "https://homeworkstack.com",
+    linkLabel: "homeworkstack.com",
+    doc: [
+      { h: "Brief", p: [
+        "For my Calculus 12 final project I wrote a tribute to the course in the form of a eulogy, and published it as a website instead of a paper. It is live at homeworkstack.com."
+      ] },
+      { h: "What is on the site", list: [
+        "The eulogy: six chapters that tell the story of calculus, starting from the idea of a limit and the continuity it makes possible.",
+        "The journey: four cards covering limits and continuity, derivatives, applications and integration, each with its defining formula.",
+        "Living equations: eight typeset formulas, from the limit definition of the derivative through the product, quotient and chain rules to both parts of the Fundamental Theorem of Calculus.",
+        "A historical timeline from Archimedes' method of exhaustion, through Newton and Leibniz, to Cauchy's rigorous limits and modern uses.",
+        "A candle the visitor can light to pay their respects."
+      ] },
+      { h: "The math it covers", table: {
+        head: ["Topic", "Idea"],
+        rows: [
+          ["Limits and continuity", "Approaching a value without reaching it; an unbroken path"],
+          ["Derivatives", "Instantaneous rate of change; product, quotient and chain rules"],
+          ["Applications", "Optimization where f'(x) = 0, related rates"],
+          ["Integration", "Summing infinitely thin slices into an area; the Fundamental Theorem"]
+        ]
+      } },
+      { h: "How I built it", p: [
+        "I built the site through AI-assisted development. I planned the structure and the story it tells, then worked with an AI coding assistant to turn that plan into working code, directing each section and refining the layout, typeset equations and interactions until the result matched what I had in mind.",
+        "The finished site is published on its own domain, homeworkstack.com."
+      ] }
+    ]
+  }
+];
+
+/* ---------- Line drawings used until you add photos ---------- */
+function drawing(kind) {
+  var open = '<svg viewBox="0 0 320 160" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="' + kind + ' line drawing">';
+  var inner = "";
+  if (kind === "truss") {
+    var bottom = [40, 100, 160, 220, 280], top = [70, 130, 190, 250], i;
+    inner += '<path d="M40 110H280M70 58H250"/>';
+    var zig = "M40 110";
+    for (i = 0; i < top.length; i++) zig += "L" + top[i] + " 58L" + bottom[i + 1] + " 110";
+    inner += '<path d="' + zig + '"/>';
+    inner += '<path d="M30 126L40 110L50 126Z M270 126L280 110L290 126Z" stroke-width="1.5"/>';
+    inner += '<path d="M160 26V50M154 43L160 51L166 43" stroke-width="1.5"/>';
+    inner += '<path d="M40 142H280M40 136V148M280 136V148" stroke-width="1" opacity=".6"/>';
+  } else if (kind === "circuit") {
+    inner += '<path d="M60 44H110L116 32L128 56L140 32L152 56L164 32L170 44H260V76"/>';
+    inner += '<path d="M244 76H276M250 86H270" /><path d="M260 86V120H60V96"/>';
+    inner += '<circle cx="60" cy="80" r="16"/><path d="M60 64V44M54 74H66M60 68V80M54 88H66" stroke-width="1.5"/>';
+    inner += '<circle cx="110" cy="44" r="2.5" fill="currentColor"/><circle cx="170" cy="44" r="2.5" fill="currentColor"/>';
+  } else if (kind === "plot") {
+    inner += '<path d="M44 24V132H292" stroke-width="1.5"/>';
+    var d = "", x;
+    for (x = 0; x <= 240; x += 3) {
+      var y = 78 - 46 * Math.exp(-x / 110) * Math.cos(x / 9.5);
+      d += (x === 0 ? "M" : "L") + (48 + x) + " " + y.toFixed(1);
+    }
+    inner += '<path d="' + d + '"/>';
+    var e1 = "", e2 = "";
+    for (x = 0; x <= 240; x += 8) {
+      var a = 46 * Math.exp(-x / 110);
+      e1 += (x === 0 ? "M" : "L") + (48 + x) + " " + (78 - a).toFixed(1);
+      e2 += (x === 0 ? "M" : "L") + (48 + x) + " " + (78 + a).toFixed(1);
+    }
+    inner += '<path d="' + e1 + e2 + '" stroke-width="1" stroke-dasharray="4 5" opacity=".7"/>';
+  } else if (kind === "integral") {
+    inner += '<path d="M40 20V136H296" stroke-width="1.5"/>';
+    var f = function (x) { return 86 - 34 * Math.sin((x - 60) / 46) - (x - 60) * 0.12; };
+    var c = "", h = "", xx;
+    for (xx = 50; xx <= 286; xx += 4) c += (xx === 50 ? "M" : "L") + xx + " " + f(xx).toFixed(1);
+    inner += '<path d="' + c + '"/>';
+    for (xx = 104; xx <= 224; xx += 10) h += "M" + xx + " 136V" + f(xx).toFixed(1);
+    inner += '<path d="' + h + '" stroke-width="1" opacity=".55"/>';
+    inner += '<path d="M104 136V' + f(104).toFixed(1) + "M224 136V" + f(224).toFixed(1) + '" stroke-width="2"/>';
+    inner += '<path d="M104 142V150M224 142V150" stroke-width="1" opacity=".7"/>';
+  } else if (kind === "route") {
+    inner += '<path d="M24 118C70 118 84 84 118 80"/><path d="M206 74C240 70 262 44 298 42"/>';
+    inner += '<path d="M118 80L206 74" stroke-dasharray="3 9" stroke-width="3"/>';
+    inner += '<circle cx="118" cy="80" r="6"/><circle cx="206" cy="74" r="6"/>';
+    inner += '<path d="M118 80C120 124 196 126 206 74" stroke-width="1" stroke-dasharray="6 5" opacity=".7"/>';
+    inner += '<path d="M40 30H300M40 146H300M90 16V152M250 16V152" stroke-width="1" opacity=".35"/>';
+    inner += '<path d="M118 52H206M118 46V58M206 46V58" stroke-width="1" opacity=".7"/>';
+  } else {
+    inner += '<rect x="70" y="40" width="120" height="76"/><circle cx="130" cy="78" r="20"/>';
+    inner += '<path d="M130 28V128M58 78H202" stroke-width="1" stroke-dasharray="10 4 2 4" opacity=".7"/>';
+    inner += '<rect x="226" y="40" width="40" height="76"/><path d="M226 58H266M226 98H266" stroke-width="1" stroke-dasharray="4 4"/>';
+    inner += '<path d="M70 136H190M70 130V142M190 130V142" stroke-width="1" opacity=".6"/>';
+  }
+  return open + inner + "</svg>";
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+  });
+}
+
+function figureFor(p) {
+  return p.image
+    ? '<img src="' + esc(p.image) + '" alt="' + esc(p.alt || p.title) + '">'
+    : drawing(p.figure || "sketch");
+}
+function sheetNo(index) { return "P-" + String(index + 1).padStart(3, "0"); }
+
+/* Home page card: brief description and date only */
+function card(p, index) {
+  return '<a class="sheet" href="#' + esc(p.id) + '">' +
+    "<figure>" + figureFor(p) + "</figure>" +
+    '<div class="body">' +
+      '<div class="meta"><span class="note no">' + sheetNo(index) + '</span><span class="note">' + esc(p.area) + "</span></div>" +
+      "<h3>" + esc(p.title) + "</h3>" +
+      '<p class="sum">' + esc(p.summary) + "</p>" +
+      '<div class="foot"><span class="note">' + esc(p.date) + '</span><span class="open">Open documentation &rarr;</span></div>' +
+    "</div></a>";
+}
+
+/* Full documentation page */
+function section(sec, n) {
+  var html = '<section style="padding:0;border:0"><h2><span class="note">' + String(n).padStart(2, "0") + "</span>" + esc(sec.h) + "</h2>";
+  (sec.p || []).forEach(function (t) { html += "<p>" + esc(t) + "</p>"; });
+  if (sec.list) html += "<ul>" + sec.list.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>";
+  if (sec.steps) html += "<ol>" + sec.steps.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ol>";
+  if (sec.table) {
+    html += '<div class="tablewrap"><table><thead><tr>' +
+      sec.table.head.map(function (t) { return "<th>" + esc(t) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      sec.table.rows.map(function (r) {
+        return "<tr>" + r.map(function (t) { return "<td>" + esc(t) + "</td>"; }).join("") + "</tr>";
+      }).join("") + "</tbody></table></div>";
+  }
+  if (sec.todo) html += '<p class="todo">' + esc(sec.todo) + "</p>";
+  return html + "</section>";
+}
+
+function detail(p, index) {
+  var prev = PROJECTS[index - 1], next = PROJECTS[index + 1];
+  var html = '<div class="wrap">' +
+    '<a class="back" href="#projects">&larr; All projects</a>' +
+    '<div class="dhead"><div>' +
+      '<p class="note">' + sheetNo(index) + " / " + esc(p.area) + "</p>" +
+      "<h1>" + esc(p.title) + "</h1>" +
+      '<p class="sum">' + esc(p.summary) + "</p>" +
+    "</div>" +
+    '<dl class="facts">' +
+      "<div><dt>Date</dt><dd>" + esc(p.date) + "</dd></div>" +
+      "<div><dt>Role</dt><dd>" + esc(p.role) + "</dd></div>" +
+      "<div><dt>Tools</dt><dd>" + esc((p.tools || []).join(", ")) + "</dd></div>" +
+      (p.link ? '<div><dt>Link</dt><dd><a href="' + esc(p.link) + '">' + esc(p.linkLabel || "Open") + "</a></dd></div>" : "") +
+    "</dl></div>" +
+    (p.slides && p.slides.length
+      ? '<div class="viewer" id="viewer" aria-label="Presentation slides">' +
+          '<div class="stage"><img id="slideImg" src="" alt=""></div>' +
+          '<div class="ctrl">' +
+            '<button type="button" id="slidePrev" aria-label="Previous slide">&larr; Prev</button>' +
+            '<button type="button" id="slideNext" aria-label="Next slide">Next &rarr;</button>' +
+            '<span class="count" id="slideCount"></span>' +
+            '<span class="cap" id="slideCap"></span>' +
+          "</div></div>"
+      : '<figure class="dhero">' + figureFor(p) + "</figure>") +
+    '<div class="doc">';
+  (p.doc || []).forEach(function (sec, i) { html += section(sec, i + 1); });
+  if (p.gallery && p.gallery.length) {
+    html += '<section style="padding:0;border:0"><h2><span class="note">' + String((p.doc || []).length + 1).padStart(2, "0") + '</span>Photos and drawings</h2><div class="gallery">' +
+      p.gallery.map(function (g) {
+        return '<figure><img loading="lazy" src="' + esc(g.src) + '" alt="' + esc(g.cap) + '"><figcaption>' + esc(g.cap) + "</figcaption></figure>";
+      }).join("") + "</div></section>";
+  }
+  html += "</div>" +
+    '<nav class="pager" aria-label="Other projects">' +
+      (prev ? '<a href="#' + esc(prev.id) + '">&larr; ' + esc(prev.title) + "</a>" : "<span></span>") +
+      (next ? '<a href="#' + esc(next.id) + '">' + esc(next.title) + " &rarr;</a>" : "<span></span>") +
+    "</nav></div>";
+  return html;
+}
+
+/* Slide viewer: buttons and left/right arrow keys step through p.slides */
+var slideState = null;
+function showSlide(i) {
+  var st = slideState;
+  if (!st) return;
+  st.i = Math.max(0, Math.min(st.slides.length - 1, i));
+  var sl = st.slides[st.i];
+  var img = document.getElementById("slideImg");
+  img.src = sl.src;
+  img.alt = sl.cap || ("Slide " + (st.i + 1));
+  document.getElementById("slideCount").textContent = (st.i + 1) + " / " + st.slides.length;
+  document.getElementById("slideCap").textContent = sl.cap || "";
+  document.getElementById("slidePrev").disabled = st.i === 0;
+  document.getElementById("slideNext").disabled = st.i === st.slides.length - 1;
+  if (st.slides[st.i + 1]) { var pre = new Image(); pre.src = st.slides[st.i + 1].src; }
+}
+function initViewer(p) {
+  slideState = null;
+  if (!p.slides || !p.slides.length) return;
+  slideState = { slides: p.slides, i: 0 };
+  document.getElementById("slidePrev").addEventListener("click", function () { showSlide(slideState.i - 1); });
+  document.getElementById("slideNext").addEventListener("click", function () { showSlide(slideState.i + 1); });
+  showSlide(0);
+}
+/* Swipe left or right on the slide to change it (phones and tablets) */
+var touchX = null;
+document.addEventListener("touchstart", function (e) {
+  touchX = (slideState && e.target && e.target.id === "slideImg") ? e.touches[0].clientX : null;
+}, { passive: true });
+document.addEventListener("touchend", function (e) {
+  if (touchX === null || !slideState) return;
+  var dx = e.changedTouches[0].clientX - touchX;
+  touchX = null;
+  if (Math.abs(dx) > 40) showSlide(slideState.i + (dx < 0 ? 1 : -1));
+}, { passive: true });
+document.addEventListener("keydown", function (e) {
+  if (!slideState || detailView.hidden) return;
+  if (e.key === "ArrowLeft") showSlide(slideState.i - 1);
+  if (e.key === "ArrowRight") showSlide(slideState.i + 1);
+});
+
+/* Click a slide or gallery image to enlarge it; click again or press Escape to close */
+var lightbox = document.getElementById("lightbox");
+function closeLightbox() { lightbox.hidden = true; }
+document.addEventListener("click", function (e) {
+  var t = e.target;
+  if (!lightbox.hidden) { closeLightbox(); return; }
+  if (t && t.tagName === "IMG" && t.closest && (t.closest(".gallery") || t.id === "slideImg")) {
+    var big = lightbox.querySelector("img");
+    big.src = t.src;
+    big.alt = t.alt;
+    lightbox.hidden = false;
+  }
+});
+document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLightbox(); });
+
+var grid = document.getElementById("grid");
+var filters = document.getElementById("filters");
+var homeView = document.getElementById("home");
+var detailView = document.getElementById("detail");
+var current = "All";
+
+function render() {
+  var html = "";
+  PROJECTS.forEach(function (p, i) {
+    if (current === "All" || p.area === current) html += card(p, i);
+  });
+  grid.innerHTML = html || '<p class="empty">No projects in this area yet.</p>';
+  Array.prototype.forEach.call(filters.children, function (b) {
+    b.setAttribute("aria-pressed", b.dataset.area === current ? "true" : "false");
+  });
+}
+
+/* The address after # picks the view: a project id opens its documentation,
+   anything else shows the home page (and scrolls to that section). */
+function route() {
+  var id = decodeURIComponent(location.hash.replace(/^#/, ""));
+  var index = -1;
+  PROJECTS.forEach(function (p, i) { if (p.id === id) index = i; });
+  if (index >= 0) {
+    detailView.innerHTML = detail(PROJECTS[index], index);
+    initViewer(PROJECTS[index]);
+    homeView.hidden = true;
+    detailView.hidden = false;
+    window.scrollTo(0, 0);
+  } else {
+    slideState = null;
+    detailView.hidden = true;
+    homeView.hidden = false;
+    var target = id && document.getElementById(id);
+    if (target) target.scrollIntoView();
+    else window.scrollTo(0, 0);
+  }
+}
+
+var areas = ["All"];
+PROJECTS.forEach(function (p) { if (areas.indexOf(p.area) < 0) areas.push(p.area); });
+areas.forEach(function (a) {
+  var b = document.createElement("button");
+  b.type = "button";
+  b.dataset.area = a;
+  b.textContent = a;
+  b.addEventListener("click", function () { current = a; render(); });
+  filters.appendChild(b);
+});
+document.getElementById("sheetCount").textContent = PROJECTS.length;
+render();
+route();
+window.addEventListener("hashchange", route);
+</script>
+</body>
+</html>
