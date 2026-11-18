@@ -220,6 +220,9 @@ a.sheet:hover, a.sheet:focus-visible { transform: translate(-3px, -3px); box-sha
 .doc .chartnote { margin-top: 8px; }
 .doc .links { padding-left: 22px; }
 .doc section > :not(h2) + :not(h2) { margin-top: 12px; }
+.poster { margin: 12px 0 0; border: 1.5px solid var(--ink); background: var(--sheet); }
+.poster img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+.poster figcaption { padding: 8px 12px; border-top: 1px solid var(--line); }
 .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 4px; align-items: start; }
 .gallery figure { margin: 0; border: 1px solid var(--line); background: var(--sheet); }
 .gallery img { display: block; width: 100%; height: auto; }
@@ -619,6 +622,7 @@ var PROJECTS = [
         "Our team answered a design competition from a fictional disaster-relief organization. After floods, fires and storms, families can spend days or weeks sheltering in gymnasiums with none of their own belongings. That is hardest on young children.",
         "The ask was a personal cardboard chair for children aged 4 to 6. Building and decorating it gives them something to do together, and afterwards it is theirs to sit on and play with."
       ] },
+      {"h": "Design poster", "p": ["Our team summarized the whole design on one showcase poster: the goal, stakeholders, concept ranking, the chosen design in both forms, its statistics, the trade-off we accepted and the key features. Select the poster to enlarge it."], "img": {"src": "images/chair-poster.jpg", "cap": "Team T9 showcase poster, Treasure Throne. Team members' names and photo are covered.", "alt": "Team T9 design poster for the Treasure Throne cardboard chair"}, "table": {"head": ["Poster panel", "What it shows"], "rows": [["Our goal", "Children in shelters need a place to rest, relieve stress and keep their belongings. A cardboard chair is cheap, easy to transport and versatile enough to cover all three."], ["Stakeholders", "Needs, reasons and design specifications for children, parents and guardians, disaster volunteers, manufacturers and distribution."], ["Idea generation and ranking", "Four concepts sketched, then ranked weak, medium or strong on criteria including static load, storage, cardboard use, comfort, assembly time and aesthetics."], ["Design process", "Strengths and weaknesses of each team member's prototype."], ["Design process integration", "What the prototypes taught us: tabs are easier to assemble than slits, supports under the seat must take up little space to leave room for storage, and complex designs take longer to build. So the final design uses tabs, minimal supports and a simple layout."], ["Closed form and chair form", "The same chair packed up as a treasure chest and opened out as a seat, with the cutting pattern for the single sheet."], ["Chair statistics", "Aesthetics 10/10 and a 9.25 x 9.25 x 12 in storage space, with the team's estimates of static load and cardboard use."], ["Design trade-off", "We accepted weaker internal support in exchange for more storage, less cardboard and quicker construction. Design 4 was chosen because it best balanced comfort, storage capacity and ease of construction."], ["Key design features", "01 lift-up seat hatch for built-in storage; 02 interlocking tabs with no complicated assembly; 03 internal supports that preserve storage space; 04 five-piece design; 05 supportive backrest that folds into the treasure chest form."]]}},
       { h: "Requirements", list: [
         "Made from a single flat 1.2 m by 1.2 m sheet of corrugated cardboard, so 100 chairs ship as one bundle about 40 cm high.",
         "Cardboard only for anything structural: no tape, glue, straps or wood.",
@@ -921,6 +925,7 @@ function section(sec, n) {
   if (sec.formula) html += '<pre class="formula">' + sec.formula.map(esc).join("\n") + "</pre>";
   if (sec.list) html += "<ul>" + sec.list.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>";
   if (sec.steps) html += "<ol>" + sec.steps.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ol>";
+  if (sec.img) html += '<figure class="poster"><img src="' + esc(sec.img.src) + '" alt="' + esc(sec.img.alt || sec.img.cap || "") + '"><figcaption class="note">' + esc(sec.img.cap || "") + "</figcaption></figure>";
   if (sec.svg) html += sec.svg; /* trusted markup written in this file */
   if (sec.note) html += '<p class="chartnote note">' + esc(sec.note) + "</p>";
   if (sec.table) html += tableHtml(sec.table);
@@ -1022,7 +1027,7 @@ function closeLightbox() { lightbox.hidden = true; }
 document.addEventListener("click", function (e) {
   var t = e.target;
   if (!lightbox.hidden) { closeLightbox(); return; }
-  if (t && t.tagName === "IMG" && t.closest && (t.closest(".gallery") || t.id === "slideImg")) {
+  if (t && t.tagName === "IMG" && t.closest && (t.closest(".gallery") || t.closest(".poster") || t.id === "slideImg")) {
     var big = lightbox.querySelector("img");
     big.src = t.src;
     big.alt = t.alt;
