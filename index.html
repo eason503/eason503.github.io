@@ -335,6 +335,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <span class="note">May 2026</span>
           <span class="open">homeworkstack.com &#8599;</span>
         </a>
+        <div class="hs-row">
+          <span class="hs-title">Computer Programming 12</span>
+          <span class="hs-sum">Python coursework: a two-player networked UNO game (sockets, threads, JSON messages, Tkinter interface), a PyQt6 workout tracker with logins, and a JSON-based study game.</span>
+          <span class="note">2025 to 2026</span>
+        </div>
       </div>
     </div>
   </section>
@@ -406,7 +411,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       </div>
       <dl class="facts" style="max-width: 560px">
         <div><dt>Email</dt><dd><a href="mailto:easonh503@gmail.com">easonh503@gmail.com</a></dd></div>
-        <div><dt>GitHub</dt><dd><a href="https://github.com/easonh503-hub">github.com/easonh503-hub</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/eason503">github.com/eason503</a></dd></div>
         <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/easonhuang503">linkedin.com/in/easonhuang503</a></dd></div>
         <div><dt>Portfolio PDF</dt><dd><a href="Eason_Huang_Portfolio.pdf">Two-page summary (PDF)</a></dd></div>
         <div><dt>Resume</dt><dd>Available on request</dd></div>
@@ -712,7 +717,7 @@ var PROJECTS = [
       ] },
       { h: "How it works", steps: [
         "A 9 V battery supplies the energy.",
-        "A 2N2222A transistor switches the current on and off rapidly, so the current through the coil keeps changing.",
+        "A 2N2222A transistor switches the current on and off rapidly, so the current through the coil keeps changing. The transmitter coil is centre-tapped: one half carries the current, and the other half feeds part of the changing voltage back to the transistor's base, so the circuit keeps switching itself on and off (a feedback oscillator).",
         "The transmitter coil turns that changing current into a changing magnetic field.",
         "The receiver coil sits in that field, and the changing flux induces a voltage in it (Faraday's law).",
         "The induced current lights the LED. The receiver has no battery."
@@ -728,13 +733,24 @@ var PROJECTS = [
       { h: "A misconception I corrected", p: [
         "At first I thought a steady current through one coil would keep transferring power to the other. It does not. Only a changing magnetic field induces a voltage in the second coil, which is why the circuit needs the transistor to keep switching."
       ] },
+      { h: "Research and mentors", p: [
+        "I started by relearning Faraday's law from my Physics 12 notes, and found I had memorized the formula without understanding how each variable changes the induced voltage. I then compared build tutorials and asked questions on the Arduino Forum and Reddit, since I had no in-person mentor.",
+        "Advice from experienced builders shaped the design:"
+      ], list: [
+        "Use air-core copper coils. A ferrite core is not needed for a beginner build like this.",
+        "Start with wide-diameter coils before trying other shapes.",
+        "Keep the spacing and alignment between the coils consistent, and change one variable at a time.",
+        "Start with the simplest working circuit, and use a breadboard to cut down on soldering while testing."
+      ], after: [
+        "I logged over 30 hours on research and building by March 2026."
+      ] },
       { h: "Design", table: {
         head: ["Part", "Detail"],
         rows: [
           ["Transmitter coil", "30 turns of copper magnet wire: 15 turns, a centre tap, then 15 more"],
           ["Receiver coil", "30 turns, with an LED across its two ends"],
           ["Switching", "2N2222A transistor"],
-          ["Resistance", "Three 10 kΩ resistors in series, about 30 kΩ"],
+          ["Resistance", "Design value 27 kΩ. With no 27 kΩ resistor on hand, the first build combined 10 + 10 + 5.1 + 2 kΩ in series (R = R₁ + R₂ + …). The final transmitter uses three 10 kΩ resistors, about 30 kΩ."],
           ["Power", "9 V battery on the transmitter side, connected to the centre tap"],
           ["Tools", "Soldering iron, solder and flux, multimeter"]
         ]
@@ -752,7 +768,7 @@ var PROJECTS = [
         ]
       } },
       { h: "Four versions", list: [
-        "Version 1 did not light the LED at all. Likely causes were enamel left on the wire ends, weak solder joints, a wrong connection or a damaged transistor. I found the faults by testing continuity at each connection with a multimeter and eliminating sections one at a time. Lesson: a circuit can look connected and still fail electrically.",
+        "Version 1 did not light the LED at all. Testing along the circuit with a multimeter showed current reaching the coils but not getting through them. My two hypotheses were unsoldered joints at the coil ends and a coil with the wrong number of turns, so I rebuilt it with each coil wound to exactly 30 turns. Solder also would not stick to the copper until I scraped the enamel off and used rosin flux paste. Lesson: a circuit can look connected and still fail electrically.",
         "Version 2 worked, and the LED lit wirelessly for the first time. I then left it powered overnight, which drained the battery and may have damaged components.",
         "Versions 3 and 4 had cleaner soldering, more consistent coil winding and more reliable connections. By then I could rebuild the circuit without following a tutorial."
       ] },
@@ -779,6 +795,10 @@ var PROJECTS = [
       ] }
     ],
     gallery: [
+      { src: "images/wpt-tools.jpg", cap: "Step 1, tools: soldering iron, rosin flux paste and multimeter" },
+      { src: "images/wpt-winding.jpg", cap: "Step 2, winding: copper magnet wire wound around a bottle to set the coil diameter" },
+      { src: "images/wpt-coils.jpg", cap: "Step 3, coils: centre-tapped transmitter (left) and receiver (right), 30 turns each" },
+      { src: "images/wpt-prototype.jpg", cap: "Step 4, prototype: 9 V battery, resistors and transistor feeding the transmitter, with the receiver and LED beside it" },
       { src: "images/wpt-transmitter-full.jpg", cap: "Transmitter: centre-tapped coil, three resistors in series, transistor and 9 V battery clip" }
     ]
   }
