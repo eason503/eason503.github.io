@@ -572,7 +572,7 @@ var PROJECTS = [
   },
   {
     id: "keychain",
-    wh: {"what": "My first CAD part: a steel-ball keychain with my team badge, sized for a 40 x 15 x 10 mm print envelope.", "how": "Modelled the sphere, raised badge, recessed slots and cable ring in SolidWorks after one day of learning CAD, checked the bounding box, and exported an STL.", "result": "The part printed in one piece: the sphere, cable ring, side slots and raised badge all came out, though the fine T9 lettering printed soft at this small size."},
+    wh: {"what": "My first CAD part: a steel-ball keychain with my team badge, sized for a 40 x 15 x 10 mm print envelope.", "how": "Modelled the sphere, raised badge, recessed slots and cable ring in SolidWorks after one day of learning CAD, checked the bounding box, and exported an STL.", "result": "The part printed in one piece with every feature intact. I made it far smaller than it needed to be, because I read the size limit as the required size, so the fine T9 lettering printed soft."},
     title: "3D-printed keychain",
     area: "CAD",
     date: "Oct 2026",
@@ -605,12 +605,13 @@ var PROJECTS = [
       ] },
       { h: "Result", p: [
         "The keychain printed in one piece. The sphere, the cable ring, the recessed side slots and the raised pentagon badge all came out as modelled.",
-        "The fine detail did not fully survive: the T9 lettering inside the badge printed with soft, rounded edges, so it reads less clearly than in the CAD model. Lettering this small sits close to the smallest detail the printer can reproduce. Next time I would make the text larger and deeper, or drop it in favour of a bolder shape."
+        "I made the keychain far smaller than it needed to be. I read the 40 x 15 x 10 mm box as the size the part had to be, when it was only the largest size allowed. At that scale the T9 lettering inside the badge printed with soft, rounded edges, so it reads less clearly than in the CAD model.",
+        "The lesson: read a requirement carefully for whether it is a target or a limit. Next time I would use more of the allowed space and make the lettering larger and deeper."
       ] }
     ],
     gallery: [
       { src: "images/keychain-cad.jpg", cap: "SolidWorks model with its bounding box checked against the print limits" },
-      { src: "images/keychain-print-front.jpg", cap: "Printed part, front: the badge and T9 lettering came out soft at this size" },
+      { src: "images/keychain-print-front.jpg", cap: "Printed part, front: at this small size the badge and T9 lettering came out soft" },
       { src: "images/keychain-print-side.jpg", cap: "Printed part, side: the cable ring and recessed slots" }
     ]
   },
