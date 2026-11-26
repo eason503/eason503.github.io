@@ -226,6 +226,8 @@ a.sheet:hover, a.sheet:focus-visible { transform: translate(-3px, -3px); box-sha
 .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 4px; align-items: start; }
 .gallery figure { margin: 0; border: 1px solid var(--line); background: var(--sheet); }
 .gallery img { display: block; width: 100%; height: auto; }
+.gallery .credit { display: block; margin-top: 4px; font-size: 11px; opacity: .8; }
+.inspo img { aspect-ratio: 1 / 1; object-fit: cover; }
 .gallery figcaption { font-family: var(--mono); font-size: 12px; color: var(--muted); padding: 8px 10px; border-top: 1px solid var(--line); }
 .pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); }
 .pager a { font-family: var(--mono); font-size: 13px; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; }
@@ -594,6 +596,10 @@ var PROJECTS = [
       ] },
       { h: "Inspiration", p: [
         "The design is inspired by the steel balls from Steel Ball Run, the seventh part of JoJo's Bizarre Adventure. I wanted a keychain that looked like one, with my own team badge on the front."
+      ], gallery: [
+        { src: "images/sbr-inspo-1.jpg", cap: "Gyro Zeppeli holding a steel ball", credit: "Steel Ball Run, JoJo's Bizarre Adventure Part 7, by Hirohiko Araki. © LUCKY LAND COMMUNICATIONS / SHUEISHA. Shown for reference only." },
+        { src: "images/sbr-inspo-2.jpg", cap: "Gyro Zeppeli's steel balls on his hat", credit: "Steel Ball Run, JoJo's Bizarre Adventure Part 7, by Hirohiko Araki. © LUCKY LAND COMMUNICATIONS / SHUEISHA. Shown for reference only." },
+        { src: "images/sbr-inspo-3.jpg", cap: "A fan-made 3D-printed steel ball", credit: "Fan-made print, not my work. Photo and print by their original creator; shown for reference only." }
       ] },
       { h: "Design", p: [
         "The body is a sphere with a raised pentagon badge on the front that reads T9, my studio team number. Recessed slots wrap around the sides, and a ring on top takes the keychain cable.",
@@ -936,6 +942,9 @@ function section(sec, n) {
   if (sec.list) html += "<ul>" + sec.list.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>";
   if (sec.steps) html += "<ol>" + sec.steps.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ol>";
   if (sec.img) html += '<figure class="poster"><img src="' + esc(sec.img.src) + '" alt="' + esc(sec.img.alt || sec.img.cap || "") + '"><figcaption class="note">' + esc(sec.img.cap || "") + "</figcaption></figure>";
+  if (sec.gallery) html += '<div class="gallery inspo">' + sec.gallery.map(function (g) {
+    return '<figure><img loading="lazy" src="' + esc(g.src) + '" alt="' + esc(g.cap) + '"><figcaption>' + esc(g.cap) + '<span class="credit">' + esc(g.credit) + "</span></figcaption></figure>";
+  }).join("") + "</div>";
   if (sec.svg) html += sec.svg; /* trusted markup written in this file */
   if (sec.note) html += '<p class="chartnote note">' + esc(sec.note) + "</p>";
   if (sec.table) html += tableHtml(sec.table);
